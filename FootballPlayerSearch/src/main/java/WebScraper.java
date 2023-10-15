@@ -45,7 +45,6 @@ public class WebScraper {
             String playerXGPer90 = playerRow.select("td[data-stat=xg_per90]").text();
             String playerXAGPer90 = playerRow.select("td[data-stat=xg_assist_per90]").text();
 
-            if (!playerName.isEmpty()) {
                 if (playerAge.length() >= 2) {
                     playerAge = playerAge.substring(0, 2);
                 }
@@ -55,15 +54,15 @@ public class WebScraper {
                 playerStatsList.add(playerStats);
             }
 
-        }
+
         return playerStatsList;
     }
     public void printOutEveryPlayerName() throws IOException {
         Document doc = Jsoup.connect(URL).get();
         Element playerRows = doc.select("#all_stats_standard").first();
 
-        for (Element playerRow : playerRows.select(" tbody tr")) {
-            if (playerRow.hasClass("thead") || playerRow.hasClass("rowSum")) {
+        for (Element playerRow : playerRows.select("tbody tr")) {
+            if (playerRow.hasClass("thead")) {
                 continue;
             }
             String playerName = playerRow.select("td[data-stat=player]").text();
