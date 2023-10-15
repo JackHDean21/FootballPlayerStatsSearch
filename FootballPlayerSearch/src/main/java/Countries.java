@@ -2,10 +2,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Countries {
-        private static Map<String, String> countryCodes = new HashMap<>();
+    static Map<String, String> countryCodes = new HashMap<>();
 
 
-    public static String getCountryFromCode(String countryName) {
+    public static String getCodeFromCountry(String countrySearch) {
         countryCodes.put("Chile", "CHI");
         countryCodes.put("Australia", "AUS");
         countryCodes.put("Albania", "ALB");
@@ -119,15 +119,17 @@ public class Countries {
         countryCodes.put("Zimbabwe", "ZIM");
         countryCodes.put("Zambia", "ZAM");
 
-        String countrySearch = countryName.toLowerCase();
-            if (countryCodes.containsKey(countrySearch)) {
-                return countryCodes.get(countrySearch);
-            } else {
-                return "Could not find this country.";
+        for (String country : countryCodes.keySet()) {
+            if (countrySearch.equalsIgnoreCase(country)) {
+                return countryCodes.get(country);
             }
+        }
+        return "Country: "+ countrySearch + " not recognised.";
+    }
     }
 
-}
+
+
 
 
 
